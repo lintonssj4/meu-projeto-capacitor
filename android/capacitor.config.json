@@ -1,0 +1,5 @@
+{
+  "appId": "com.todolist.app",
+  "appName": "To do list",
+  "webDir": "build"
+}

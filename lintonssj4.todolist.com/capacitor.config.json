@@ -1,0 +1,10 @@
+{
+  "appId": "lintonssj4.todolist.com",
+  "appName": "capacitor",
+  "webDir": "build",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}
