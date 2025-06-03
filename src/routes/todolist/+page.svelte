@@ -29,13 +29,13 @@
       conteudoTarefaEditando = tarefa.conteudo;
     }
   
-    function confirmarEdicao(tarefa) {
-      conteudoTarefaEditando = conteudoTarefaEditando.trim;
+    function confirmarEdicao() {
       if (!conteudoTarefaEditando) {
         mensagemToast.show();
         return;
       }
-      tarefa
+      tarefaEditando.conteudo = conteudoTarefaEditando
+      tarefaEditando = undefined
     }
   
     function cancelarEdicao() {
@@ -46,17 +46,25 @@
       tarefaExcluindo = tarefa
     }
   
-    function confirmarExclusao() {
-      tarefas.slice(start)
+    function confirmarExclusao(tarefa) {
+      tarefas.splice(tarefas.indice)
     }
   
-    function alterarStatus(tarefasPendentes, status) {
-    tarefasPendentes.forEach(tarefasPendentes.status = status); 
+    function alterarStatus(tarefas, status) {
+    tarefas.forEach(tarefas.status = status); 
+    }
+
+    function todasPendentes(){
+      tarefas.forEach((tarefa) => (tarefas.status = status));
+    }
+    function todasConcluidas(){
+      tarefas.forEach((tarefa) => (tarefas.status = 1));
     }
     onMount(() => {
       mensagemToast = new bootstrap.Toast('#mensagemToast');
     });
-  </script>
+
+</script>
   
   <div class="fixed-top pt-5" style="z-index: 1020;">
     <form class="container-fluid input-group px-4 pt-3" onsubmit={adicionarTarefa}>
@@ -65,7 +73,17 @@
     </form>
     <Toast msg={'Digite algo!'} />
   </div>
-  
+ 
+  <div class="container-fluid mt-5 pt-3">
+  <button type="submit" class="btn btn-primary input-group-text" aria-label="Concluidas" onclick={todasConcluidas}> Todas Concluidas </button>
+  <button type="submit" class="btn btn-primary input-group-text" aria-label="Concluidas" onclick={todasPendentes}> Todas Pendentes </button>
+</div>
+
+<div class="pesquisa">
+  <label for="pesquisa">Pesquisar tarefa</label>
+  <input type="pesquisa">
+</div>
+
   <div class="container-fluid mt-5 pt-3">
     <ToDoList tarefas={tarefasPendentes} {tarefaEditando} bind:conteudoTarefaEditando {editarTarefa} {confirmarEdicao} {cancelarEdicao} {alterarStatus} {excluirTarefa} />
     <hr />
